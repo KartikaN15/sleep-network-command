@@ -262,7 +262,7 @@ export const PRODUCTION = (() => {
           equipmentStatus: eqStatuses[k % eqStatuses.length],
           status: statuses[k % statuses.length],
         });
-        const gap = 1 + (k % 3); // 1-3 day gap between runs
+        const gap = 1; // fixed 1-day changeover gap between runs — keeps lines near-continuous & easy to read
         day += duration + gap;
         k++;
       }
