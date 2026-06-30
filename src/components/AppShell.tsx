@@ -199,9 +199,9 @@ export function AppHeader() {
       </button>
 
       <div className="flex items-center gap-2.5 rounded-md border border-border bg-panel py-1 pl-1 pr-3">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-[11px] font-semibold">CR</div>
+        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground text-[11px] font-semibold">RM</div>
         <div className="leading-tight">
-          <div className="text-[12.5px] font-medium">Chandrashekar R.</div>
+          <div className="text-[12.5px] font-medium">Rohan Mehta</div>
           <div className="text-[10px] text-muted-foreground">Supply Chain Head</div>
         </div>
       </div>

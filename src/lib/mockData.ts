@@ -388,7 +388,7 @@ export const INTEGRATIONS = [
 ];
 
 export const USERS_DATA = [
-  { name: "Chandrashekar R.", role: "Supply Chain Head", email: "cs.head@logistics.in", status: "Active", lastLogin: "Just now" },
+  { name: "Rohan Mehta", role: "Supply Chain Head", email: "cs.head@logistics.in", status: "Active", lastLogin: "Just now" },
   { name: "Priya Menon", role: "Plant Operations", email: "priya.m@logistics.in", status: "Active", lastLogin: "12 min ago" },
   { name: "Arjun Iyer", role: "Warehouse Manager", email: "arjun.i@logistics.in", status: "Active", lastLogin: "1 hr ago" },
   { name: "Neha Sharma", role: "Warehouse Manager", email: "neha.s@logistics.in", status: "Active", lastLogin: "Yesterday" },
