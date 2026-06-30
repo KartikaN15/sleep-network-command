@@ -19,6 +19,7 @@ import { Route as AppNetworkScenariosRouteImport } from './routes/_app.network.s
 import { Route as AppNetworkPlaybackRouteImport } from './routes/_app.network.playback'
 import { Route as AppNetworkMapRouteImport } from './routes/_app.network.map'
 import { Route as AppNetworkCompareRouteImport } from './routes/_app.network.compare'
+import { Route as AppLogisticsShipmentsRouteImport } from './routes/_app.logistics.shipments'
 import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
 import { Route as AppInventoryStockRouteImport } from './routes/_app.inventory.stock'
 import { Route as AppInventoryOrdersRouteImport } from './routes/_app.inventory.orders'
@@ -73,6 +74,11 @@ const AppNetworkCompareRoute = AppNetworkCompareRouteImport.update({
   path: '/network/compare',
   getParentRoute: () => AppRoute,
 } as any)
+const AppLogisticsShipmentsRoute = AppLogisticsShipmentsRouteImport.update({
+  id: '/logistics/shipments',
+  path: '/logistics/shipments',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
   id: '/inventory/transfers',
   path: '/inventory/transfers',
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/inventory/orders': typeof AppInventoryOrdersRoute
   '/inventory/stock': typeof AppInventoryStockRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/network/compare': typeof AppNetworkCompareRoute
   '/network/map': typeof AppNetworkMapRoute
   '/network/playback': typeof AppNetworkPlaybackRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/inventory/orders': typeof AppInventoryOrdersRoute
   '/inventory/stock': typeof AppInventoryStockRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/network/compare': typeof AppNetworkCompareRoute
   '/network/map': typeof AppNetworkMapRoute
   '/network/playback': typeof AppNetworkPlaybackRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/_app/inventory/orders': typeof AppInventoryOrdersRoute
   '/_app/inventory/stock': typeof AppInventoryStockRoute
   '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/_app/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/_app/network/compare': typeof AppNetworkCompareRoute
   '/_app/network/map': typeof AppNetworkMapRoute
   '/_app/network/playback': typeof AppNetworkPlaybackRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/inventory/orders'
     | '/inventory/stock'
     | '/inventory/transfers'
+    | '/logistics/shipments'
     | '/network/compare'
     | '/network/map'
     | '/network/playback'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/inventory/orders'
     | '/inventory/stock'
     | '/inventory/transfers'
+    | '/logistics/shipments'
     | '/network/compare'
     | '/network/map'
     | '/network/playback'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/_app/inventory/orders'
     | '/_app/inventory/stock'
     | '/_app/inventory/transfers'
+    | '/_app/logistics/shipments'
     | '/_app/network/compare'
     | '/_app/network/map'
     | '/_app/network/playback'
@@ -266,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNetworkCompareRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/logistics/shipments': {
+      id: '/_app/logistics/shipments'
+      path: '/logistics/shipments'
+      fullPath: '/logistics/shipments'
+      preLoaderRoute: typeof AppLogisticsShipmentsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/inventory/transfers': {
       id: '/_app/inventory/transfers'
       path: '/inventory/transfers'
@@ -303,6 +322,7 @@ interface AppRouteChildren {
   AppInventoryOrdersRoute: typeof AppInventoryOrdersRoute
   AppInventoryStockRoute: typeof AppInventoryStockRoute
   AppInventoryTransfersRoute: typeof AppInventoryTransfersRoute
+  AppLogisticsShipmentsRoute: typeof AppLogisticsShipmentsRoute
   AppNetworkCompareRoute: typeof AppNetworkCompareRoute
   AppNetworkMapRoute: typeof AppNetworkMapRoute
   AppNetworkPlaybackRoute: typeof AppNetworkPlaybackRoute
@@ -319,6 +339,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInventoryOrdersRoute: AppInventoryOrdersRoute,
   AppInventoryStockRoute: AppInventoryStockRoute,
   AppInventoryTransfersRoute: AppInventoryTransfersRoute,
+  AppLogisticsShipmentsRoute: AppLogisticsShipmentsRoute,
   AppNetworkCompareRoute: AppNetworkCompareRoute,
   AppNetworkMapRoute: AppNetworkMapRoute,
   AppNetworkPlaybackRoute: AppNetworkPlaybackRoute,
