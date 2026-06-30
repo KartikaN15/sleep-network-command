@@ -9,8 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppSettingsUsersRouteImport } from './routes/_app.settings.users'
+import { Route as AppSettingsLocationsRouteImport } from './routes/_app.settings.locations'
+import { Route as AppSettingsIntegrationsRouteImport } from './routes/_app.settings.integrations'
+import { Route as AppSettingsAlertsRouteImport } from './routes/_app.settings.alerts'
 import { Route as AppPlantQualityRouteImport } from './routes/_app.plant.quality'
 import { Route as AppPlantProductionRouteImport } from './routes/_app.plant.production'
 import { Route as AppPlantMaintenanceRouteImport } from './routes/_app.plant.maintenance'
@@ -20,11 +25,21 @@ import { Route as AppNetworkPlaybackRouteImport } from './routes/_app.network.pl
 import { Route as AppNetworkMapRouteImport } from './routes/_app.network.map'
 import { Route as AppNetworkCompareRouteImport } from './routes/_app.network.compare'
 import { Route as AppLogisticsShipmentsRouteImport } from './routes/_app.logistics.shipments'
+import { Route as AppLogisticsRoutesRouteImport } from './routes/_app.logistics.routes'
+import { Route as AppLogisticsCarriersRouteImport } from './routes/_app.logistics.carriers'
 import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
 import { Route as AppInventoryStockRouteImport } from './routes/_app.inventory.stock'
 import { Route as AppInventoryOrdersRouteImport } from './routes/_app.inventory.orders'
 import { Route as AppInventoryAlertsRouteImport } from './routes/_app.inventory.alerts'
+import { Route as AppAnalyticsReportsRouteImport } from './routes/_app.analytics.reports'
+import { Route as AppAnalyticsIntelligenceRouteImport } from './routes/_app.analytics.intelligence'
+import { Route as AppAnalyticsCostRouteImport } from './routes/_app.analytics.cost'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -32,6 +47,26 @@ const AppRoute = AppRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsUsersRoute = AppSettingsUsersRouteImport.update({
+  id: '/settings/users',
+  path: '/settings/users',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsLocationsRoute = AppSettingsLocationsRouteImport.update({
+  id: '/settings/locations',
+  path: '/settings/locations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsIntegrationsRoute = AppSettingsIntegrationsRouteImport.update({
+  id: '/settings/integrations',
+  path: '/settings/integrations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsAlertsRoute = AppSettingsAlertsRouteImport.update({
+  id: '/settings/alerts',
+  path: '/settings/alerts',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPlantQualityRoute = AppPlantQualityRouteImport.update({
@@ -79,6 +114,16 @@ const AppLogisticsShipmentsRoute = AppLogisticsShipmentsRouteImport.update({
   path: '/logistics/shipments',
   getParentRoute: () => AppRoute,
 } as any)
+const AppLogisticsRoutesRoute = AppLogisticsRoutesRouteImport.update({
+  id: '/logistics/routes',
+  path: '/logistics/routes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLogisticsCarriersRoute = AppLogisticsCarriersRouteImport.update({
+  id: '/logistics/carriers',
+  path: '/logistics/carriers',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
   id: '/inventory/transfers',
   path: '/inventory/transfers',
@@ -99,13 +144,35 @@ const AppInventoryAlertsRoute = AppInventoryAlertsRouteImport.update({
   path: '/inventory/alerts',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAnalyticsReportsRoute = AppAnalyticsReportsRouteImport.update({
+  id: '/analytics/reports',
+  path: '/analytics/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsIntelligenceRoute =
+  AppAnalyticsIntelligenceRouteImport.update({
+    id: '/analytics/intelligence',
+    path: '/analytics/intelligence',
+    getParentRoute: () => AppRoute,
+  } as any)
+const AppAnalyticsCostRoute = AppAnalyticsCostRouteImport.update({
+  id: '/analytics/cost',
+  path: '/analytics/cost',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
+  '/login': typeof LoginRoute
+  '/analytics/cost': typeof AppAnalyticsCostRoute
+  '/analytics/intelligence': typeof AppAnalyticsIntelligenceRoute
+  '/analytics/reports': typeof AppAnalyticsReportsRoute
   '/inventory/alerts': typeof AppInventoryAlertsRoute
   '/inventory/orders': typeof AppInventoryOrdersRoute
   '/inventory/stock': typeof AppInventoryStockRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/logistics/carriers': typeof AppLogisticsCarriersRoute
+  '/logistics/routes': typeof AppLogisticsRoutesRoute
   '/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/network/compare': typeof AppNetworkCompareRoute
   '/network/map': typeof AppNetworkMapRoute
@@ -115,13 +182,23 @@ export interface FileRoutesByFullPath {
   '/plant/maintenance': typeof AppPlantMaintenanceRoute
   '/plant/production': typeof AppPlantProductionRoute
   '/plant/quality': typeof AppPlantQualityRoute
+  '/settings/alerts': typeof AppSettingsAlertsRoute
+  '/settings/integrations': typeof AppSettingsIntegrationsRoute
+  '/settings/locations': typeof AppSettingsLocationsRoute
+  '/settings/users': typeof AppSettingsUsersRoute
 }
 export interface FileRoutesByTo {
+  '/login': typeof LoginRoute
   '/': typeof AppIndexRoute
+  '/analytics/cost': typeof AppAnalyticsCostRoute
+  '/analytics/intelligence': typeof AppAnalyticsIntelligenceRoute
+  '/analytics/reports': typeof AppAnalyticsReportsRoute
   '/inventory/alerts': typeof AppInventoryAlertsRoute
   '/inventory/orders': typeof AppInventoryOrdersRoute
   '/inventory/stock': typeof AppInventoryStockRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/logistics/carriers': typeof AppLogisticsCarriersRoute
+  '/logistics/routes': typeof AppLogisticsRoutesRoute
   '/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/network/compare': typeof AppNetworkCompareRoute
   '/network/map': typeof AppNetworkMapRoute
@@ -131,15 +208,25 @@ export interface FileRoutesByTo {
   '/plant/maintenance': typeof AppPlantMaintenanceRoute
   '/plant/production': typeof AppPlantProductionRoute
   '/plant/quality': typeof AppPlantQualityRoute
+  '/settings/alerts': typeof AppSettingsAlertsRoute
+  '/settings/integrations': typeof AppSettingsIntegrationsRoute
+  '/settings/locations': typeof AppSettingsLocationsRoute
+  '/settings/users': typeof AppSettingsUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/analytics/cost': typeof AppAnalyticsCostRoute
+  '/_app/analytics/intelligence': typeof AppAnalyticsIntelligenceRoute
+  '/_app/analytics/reports': typeof AppAnalyticsReportsRoute
   '/_app/inventory/alerts': typeof AppInventoryAlertsRoute
   '/_app/inventory/orders': typeof AppInventoryOrdersRoute
   '/_app/inventory/stock': typeof AppInventoryStockRoute
   '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/_app/logistics/carriers': typeof AppLogisticsCarriersRoute
+  '/_app/logistics/routes': typeof AppLogisticsRoutesRoute
   '/_app/logistics/shipments': typeof AppLogisticsShipmentsRoute
   '/_app/network/compare': typeof AppNetworkCompareRoute
   '/_app/network/map': typeof AppNetworkMapRoute
@@ -149,15 +236,25 @@ export interface FileRoutesById {
   '/_app/plant/maintenance': typeof AppPlantMaintenanceRoute
   '/_app/plant/production': typeof AppPlantProductionRoute
   '/_app/plant/quality': typeof AppPlantQualityRoute
+  '/_app/settings/alerts': typeof AppSettingsAlertsRoute
+  '/_app/settings/integrations': typeof AppSettingsIntegrationsRoute
+  '/_app/settings/locations': typeof AppSettingsLocationsRoute
+  '/_app/settings/users': typeof AppSettingsUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
+    | '/analytics/cost'
+    | '/analytics/intelligence'
+    | '/analytics/reports'
     | '/inventory/alerts'
     | '/inventory/orders'
     | '/inventory/stock'
     | '/inventory/transfers'
+    | '/logistics/carriers'
+    | '/logistics/routes'
     | '/logistics/shipments'
     | '/network/compare'
     | '/network/map'
@@ -167,13 +264,23 @@ export interface FileRouteTypes {
     | '/plant/maintenance'
     | '/plant/production'
     | '/plant/quality'
+    | '/settings/alerts'
+    | '/settings/integrations'
+    | '/settings/locations'
+    | '/settings/users'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/login'
     | '/'
+    | '/analytics/cost'
+    | '/analytics/intelligence'
+    | '/analytics/reports'
     | '/inventory/alerts'
     | '/inventory/orders'
     | '/inventory/stock'
     | '/inventory/transfers'
+    | '/logistics/carriers'
+    | '/logistics/routes'
     | '/logistics/shipments'
     | '/network/compare'
     | '/network/map'
@@ -183,14 +290,24 @@ export interface FileRouteTypes {
     | '/plant/maintenance'
     | '/plant/production'
     | '/plant/quality'
+    | '/settings/alerts'
+    | '/settings/integrations'
+    | '/settings/locations'
+    | '/settings/users'
   id:
     | '__root__'
     | '/_app'
+    | '/login'
     | '/_app/'
+    | '/_app/analytics/cost'
+    | '/_app/analytics/intelligence'
+    | '/_app/analytics/reports'
     | '/_app/inventory/alerts'
     | '/_app/inventory/orders'
     | '/_app/inventory/stock'
     | '/_app/inventory/transfers'
+    | '/_app/logistics/carriers'
+    | '/_app/logistics/routes'
     | '/_app/logistics/shipments'
     | '/_app/network/compare'
     | '/_app/network/map'
@@ -200,14 +317,26 @@ export interface FileRouteTypes {
     | '/_app/plant/maintenance'
     | '/_app/plant/production'
     | '/_app/plant/quality'
+    | '/_app/settings/alerts'
+    | '/_app/settings/integrations'
+    | '/_app/settings/locations'
+    | '/_app/settings/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -220,6 +349,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings/users': {
+      id: '/_app/settings/users'
+      path: '/settings/users'
+      fullPath: '/settings/users'
+      preLoaderRoute: typeof AppSettingsUsersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings/locations': {
+      id: '/_app/settings/locations'
+      path: '/settings/locations'
+      fullPath: '/settings/locations'
+      preLoaderRoute: typeof AppSettingsLocationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings/integrations': {
+      id: '/_app/settings/integrations'
+      path: '/settings/integrations'
+      fullPath: '/settings/integrations'
+      preLoaderRoute: typeof AppSettingsIntegrationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings/alerts': {
+      id: '/_app/settings/alerts'
+      path: '/settings/alerts'
+      fullPath: '/settings/alerts'
+      preLoaderRoute: typeof AppSettingsAlertsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/plant/quality': {
@@ -285,6 +442,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLogisticsShipmentsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/logistics/routes': {
+      id: '/_app/logistics/routes'
+      path: '/logistics/routes'
+      fullPath: '/logistics/routes'
+      preLoaderRoute: typeof AppLogisticsRoutesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/logistics/carriers': {
+      id: '/_app/logistics/carriers'
+      path: '/logistics/carriers'
+      fullPath: '/logistics/carriers'
+      preLoaderRoute: typeof AppLogisticsCarriersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/inventory/transfers': {
       id: '/_app/inventory/transfers'
       path: '/inventory/transfers'
@@ -313,15 +484,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInventoryAlertsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/analytics/reports': {
+      id: '/_app/analytics/reports'
+      path: '/analytics/reports'
+      fullPath: '/analytics/reports'
+      preLoaderRoute: typeof AppAnalyticsReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analytics/intelligence': {
+      id: '/_app/analytics/intelligence'
+      path: '/analytics/intelligence'
+      fullPath: '/analytics/intelligence'
+      preLoaderRoute: typeof AppAnalyticsIntelligenceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analytics/cost': {
+      id: '/_app/analytics/cost'
+      path: '/analytics/cost'
+      fullPath: '/analytics/cost'
+      preLoaderRoute: typeof AppAnalyticsCostRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppAnalyticsCostRoute: typeof AppAnalyticsCostRoute
+  AppAnalyticsIntelligenceRoute: typeof AppAnalyticsIntelligenceRoute
+  AppAnalyticsReportsRoute: typeof AppAnalyticsReportsRoute
   AppInventoryAlertsRoute: typeof AppInventoryAlertsRoute
   AppInventoryOrdersRoute: typeof AppInventoryOrdersRoute
   AppInventoryStockRoute: typeof AppInventoryStockRoute
   AppInventoryTransfersRoute: typeof AppInventoryTransfersRoute
+  AppLogisticsCarriersRoute: typeof AppLogisticsCarriersRoute
+  AppLogisticsRoutesRoute: typeof AppLogisticsRoutesRoute
   AppLogisticsShipmentsRoute: typeof AppLogisticsShipmentsRoute
   AppNetworkCompareRoute: typeof AppNetworkCompareRoute
   AppNetworkMapRoute: typeof AppNetworkMapRoute
@@ -331,14 +528,23 @@ interface AppRouteChildren {
   AppPlantMaintenanceRoute: typeof AppPlantMaintenanceRoute
   AppPlantProductionRoute: typeof AppPlantProductionRoute
   AppPlantQualityRoute: typeof AppPlantQualityRoute
+  AppSettingsAlertsRoute: typeof AppSettingsAlertsRoute
+  AppSettingsIntegrationsRoute: typeof AppSettingsIntegrationsRoute
+  AppSettingsLocationsRoute: typeof AppSettingsLocationsRoute
+  AppSettingsUsersRoute: typeof AppSettingsUsersRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppAnalyticsCostRoute: AppAnalyticsCostRoute,
+  AppAnalyticsIntelligenceRoute: AppAnalyticsIntelligenceRoute,
+  AppAnalyticsReportsRoute: AppAnalyticsReportsRoute,
   AppInventoryAlertsRoute: AppInventoryAlertsRoute,
   AppInventoryOrdersRoute: AppInventoryOrdersRoute,
   AppInventoryStockRoute: AppInventoryStockRoute,
   AppInventoryTransfersRoute: AppInventoryTransfersRoute,
+  AppLogisticsCarriersRoute: AppLogisticsCarriersRoute,
+  AppLogisticsRoutesRoute: AppLogisticsRoutesRoute,
   AppLogisticsShipmentsRoute: AppLogisticsShipmentsRoute,
   AppNetworkCompareRoute: AppNetworkCompareRoute,
   AppNetworkMapRoute: AppNetworkMapRoute,
@@ -348,12 +554,17 @@ const AppRouteChildren: AppRouteChildren = {
   AppPlantMaintenanceRoute: AppPlantMaintenanceRoute,
   AppPlantProductionRoute: AppPlantProductionRoute,
   AppPlantQualityRoute: AppPlantQualityRoute,
+  AppSettingsAlertsRoute: AppSettingsAlertsRoute,
+  AppSettingsIntegrationsRoute: AppSettingsIntegrationsRoute,
+  AppSettingsLocationsRoute: AppSettingsLocationsRoute,
+  AppSettingsUsersRoute: AppSettingsUsersRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

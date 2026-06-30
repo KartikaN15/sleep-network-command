@@ -10,7 +10,7 @@ function Page() {
     <div>
       <PageTitle title="Locations & Network Nodes" subtitle="All physical nodes in the SleepNet supply network" />
       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <KpiCard label="Manufacturing plants" value={`${PLANTS.length}`} accent="primary" />
+        <KpiCard label="Manufacturing plants" value={`${PLANTS.length}`} accent="teal" />
         <KpiCard label="Distribution centres" value={`${WAREHOUSES.length}`} accent="teal" />
         <KpiCard label="Dealer hub clusters" value={`${DEALER_HUBS.length}`} accent="warning" />
         <KpiCard label="Active dealers" value={`${DEALER_HUBS.reduce((s,h)=>s+h.count,0)}`} accent="success" />

@@ -19,7 +19,7 @@ function Page() {
     <div>
       <PageTitle title="Cost-to-Serve Analysis" subtitle="Breakdown of total cost to fulfill an order, by channel" />
       <div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-3">
-        <KpiCard label="Experience Centre · ₹/order" value="₹412" accent="primary" />
+        <KpiCard label="Experience Centre · ₹/order" value="₹412" accent="teal" />
         <KpiCard label="Dealer · ₹/order" value="₹286" accent="teal" />
         <KpiCard label="Online · ₹/order" value="₹398" accent="warning" />
       </div>
