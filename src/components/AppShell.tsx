@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  LayoutDashboard, Network, GitBranch, ScaleIcon, History, Boxes, Repeat, AlertTriangle,
+  LayoutDashboard, Network, GitBranch, Scale, History, Boxes, Repeat, AlertTriangle,
   ShoppingCart, Cog, Wrench, Calendar, Camera, Truck, Gauge, Route as RouteIcon,
   BarChart3, FileText, MapPin, Users, PlugZap, BellRing, ChevronLeft, ChevronRight,
   ChevronDown, Search, Bell, Building2,
@@ -18,7 +18,7 @@ const NAV: NavGroup[] = [
   { label: "Network Simulator", icon: Network, items: [
     { to: "/network/map", label: "Live Network Map", icon: Network },
     { to: "/network/scenarios", label: "Scenario Builder", icon: GitBranch },
-    { to: "/network/compare", label: "Scenario Comparison", icon: ScaleIcon },
+    { to: "/network/compare", label: "Scenario Comparison", icon: Scale },
     { to: "/network/playback", label: "Disruption Playback", icon: History },
   ]},
   { label: "Inventory & Fulfillment", icon: Boxes, items: [

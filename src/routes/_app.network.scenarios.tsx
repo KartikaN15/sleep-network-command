@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { NetworkMap } from "@/components/NetworkMap";
 import { Card, CardHeader, CardBody, PageTitle, Btn } from "@/components/ui-bits";
-import { Factory, TrendingUp, Building2, Truck, ExpandIcon, Play, Save, Download } from "lucide-react";
+import { Factory, TrendingUp, Building2, Truck, Maximize, Play, Save, Download } from "lucide-react";
 import { toast } from "sonner";
 import type { LaneStatus } from "@/lib/mockData";
 
@@ -15,7 +15,7 @@ const SCENARIO_TYPES = [
   { id: "demand", title: "Demand Spike", icon: TrendingUp, desc: "Regional surge in order volume" },
   { id: "warehouse", title: "New Warehouse", icon: Building2, desc: "Add a new DC to the network" },
   { id: "carrier", title: "Carrier Change", icon: Truck, desc: "Swap carrier on selected lanes" },
-  { id: "capacity", title: "Capacity Expansion", icon: ExpandIcon, desc: "Increase line capacity at a plant" },
+  { id: "capacity", title: "Capacity Expansion", icon: Maximize, desc: "Increase line capacity at a plant" },
 ];
 
 function ScenarioBuilder() {
