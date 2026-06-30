@@ -78,9 +78,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SleepNet Command — Logistics Network Simulator & Supply Chain Intelligence" },
+      { title: "Logistic Command — Logistics Network Simulator & Supply Chain Intelligence" },
       { name: "description", content: "Internal supply chain control tower for a national mattress manufacturer: network simulation, inventory, fulfillment, predictive maintenance, quality." },
-      { property: "og:title", content: "SleepNet Command" },
+      { property: "og:title", content: "Logistic Command" },
       { property: "og:description", content: "Logistics Network Simulator & Supply Chain Intelligence" },
       { property: "og:type", content: "website" },
     ],

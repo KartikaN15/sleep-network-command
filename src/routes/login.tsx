@@ -23,7 +23,7 @@ function Login() {
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-teal text-teal-foreground font-bold">S</div>
             <div>
-              <div className="text-[15px] font-semibold">SleepNet Command</div>
+              <div className="text-[15px] font-semibold">Logistic Command</div>
               <div className="text-[11.5px] text-white/60">Logistics Network Simulator</div>
             </div>
           </div>
@@ -44,7 +44,7 @@ function Login() {
         <div className="w-full max-w-md">
           <div className="mb-6 flex items-center gap-2.5 lg:hidden">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-teal text-teal-foreground font-bold">S</div>
-            <div className="text-[16px] font-semibold">SleepNet Command</div>
+            <div className="text-[16px] font-semibold">Logistic Command</div>
           </div>
           <h2 className="text-[22px] font-bold">Sign in</h2>
           <p className="mt-1 text-[13px] text-muted-foreground">Continue to your supply chain control tower.</p>

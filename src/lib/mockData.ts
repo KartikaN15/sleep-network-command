@@ -1,4 +1,4 @@
-// SleepNet Command — mock dataset for the prototype.
+// Logistic Command — mock dataset for the prototype.
 // All values are illustrative for a national mattress & sleep-solutions manufacturer.
 
 export type Status = "healthy" | "warning" | "critical";
@@ -217,25 +217,59 @@ export const MAINTENANCE_QUEUE = [
 ];
 
 // ---- Production schedule ----
-export const PRODUCTION = Array.from({ length: 24 }, (_, i) => {
-  const cats = ["Spring", "Foam", "Coir"];
-  const cat = cats[i % 3];
-  const plant = ["Hosur","Karimangalam","Bhiwandi","Hyderabad","Indore"][i % 5];
-  const startDay = (i * 2) % 30;
-  return {
-    id: `WO-${(40120 + i)}`,
-    product: `${cat} ${["Queen","King","Single"][i % 3]} - ${["OrthoCloud","DreamSoft","EcoRest","MemoryFlex","CoolGel"][i % 5]}`,
-    plant,
-    line: `Line ${1 + (i % 4)}`,
-    batch: 120 + (i * 17) % 280,
-    start: startDay,
-    duration: 2 + (i % 4),
-    category: cat,
-    materialStatus: (["Ready","Ready","Ready","Partial","Ready","Awaiting"] as const)[i % 6],
-    equipmentStatus: (["OK","OK","OK","Watch","OK"] as const)[i % 5],
-    status: (["Scheduled","In Progress","In Progress","Scheduled","Queued"] as const)[i % 5],
+export const PRODUCTION = (() => {
+  const cats = ["Spring", "Foam", "Coir"] as const;
+  const plants = ["Hosur", "Karimangalam", "Bhiwandi", "Hyderabad", "Indore"];
+  const linesPerPlant = 4;
+  const skuByCat: Record<string, string[]> = {
+    Spring: ["OrthoCloud", "PostureSpring", "BackCare"],
+    Foam: ["MemoryFlex", "CoolGel", "DreamSoft"],
+    Coir: ["EcoRest", "NatureCoir", "FirmCore"],
   };
-});
+  const sizes = ["Queen", "King", "Single", "Double"];
+  const matStatuses = ["Ready", "Ready", "Ready", "Partial", "Awaiting"] as const;
+  const eqStatuses = ["OK", "OK", "OK", "Watch"] as const;
+  const statuses = ["Scheduled", "In Progress", "Queued"] as const;
+
+  const out: Array<{
+    id: string; product: string; plant: string; line: string;
+    batch: number; start: number; duration: number; category: string;
+    materialStatus: (typeof matStatuses)[number];
+    equipmentStatus: (typeof eqStatuses)[number];
+    status: (typeof statuses)[number];
+  }> = [];
+
+  let wo = 40120;
+  let k = 0;
+  plants.forEach((plant, pi) => {
+    for (let l = 1; l <= linesPerPlant; l++) {
+      // Each line gets a back-to-back chain of work orders across ~90 days.
+      let day = (pi + l) % 4; // small per-line stagger so starts don't all align
+      while (day < 90) {
+        const cat = cats[k % 3];
+        const skus = skuByCat[cat];
+        const duration = 3 + (k % 5); // 3-7 days
+        out.push({
+          id: `WO-${wo++}`,
+          product: `${cat} ${sizes[k % sizes.length]} - ${skus[k % skus.length]}`,
+          plant,
+          line: `Line ${l}`,
+          batch: 120 + ((k * 37) % 320),
+          start: day,
+          duration,
+          category: cat,
+          materialStatus: matStatuses[k % matStatuses.length],
+          equipmentStatus: eqStatuses[k % eqStatuses.length],
+          status: statuses[k % statuses.length],
+        });
+        const gap = 1 + (k % 3); // 1-3 day gap between runs
+        day += duration + gap;
+        k++;
+      }
+    }
+  });
+  return out;
+})();
 
 // ---- Quality ----
 export const QUALITY_DEFECTS = [

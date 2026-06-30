@@ -70,7 +70,7 @@ export function AppSidebar({ collapsed, onToggle }: { collapsed: boolean; onTogg
         </div>
         {!collapsed && (
           <div className="min-w-0 flex-1">
-            <div className="truncate text-sm font-semibold">SleepNet Command</div>
+            <div className="truncate text-sm font-semibold">Logistic Command</div>
             <div className="truncate text-[10px] text-sidebar-muted">Logistics Network Simulator</div>
           </div>
         )}

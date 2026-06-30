@@ -1,15 +1,77 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useRef, useState } from "react";
 import { QUALITY_DEFECTS, QUALITY_FEED, SUPPLIER_SCORECARD } from "@/lib/mockData";
-import { Card, CardHeader, CardBody, PageTitle, KpiCard } from "@/components/ui-bits";
+import { Card, CardHeader, CardBody, PageTitle, KpiCard, Btn } from "@/components/ui-bits";
 import { StatusBadge } from "@/components/NetworkMap";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from "recharts";
-import { ImageIcon, AlertCircle, TrendingDown, TrendingUp, Minus } from "lucide-react";
+import { ImageIcon, AlertCircle, TrendingDown, TrendingUp, Minus, Upload } from "lucide-react";
 
 export const Route = createFileRoute("/_app/plant/quality")({
   component: QualityPage,
 });
 
+type FeedRow = (typeof QUALITY_FEED)[number] & { image?: string | null };
+
+// Clickable image cell: uploads / replaces an inspection image and previews it.
+function ImageCell({ defect, image, onUpload }: { defect: boolean; image?: string | null; onUpload: (url: string) => void }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  return (
+    <>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) onUpload(URL.createObjectURL(f));
+          e.target.value = "";
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        title={image ? "Replace inspection image" : "Upload inspection image"}
+        className={`flex h-8 w-12 items-center justify-center overflow-hidden rounded border transition hover:ring-2 hover:ring-primary/30 ${
+          image
+            ? "border-border"
+            : defect
+              ? "border-critical/30 bg-critical/5 text-critical"
+              : "border-border bg-panel text-muted-foreground"
+        }`}
+      >
+        {image ? <img src={image} alt="inspection" className="h-full w-full object-cover" /> : <ImageIcon size={12} />}
+      </button>
+    </>
+  );
+}
+
 function QualityPage() {
+  const [rows, setRows] = useState<FeedRow[]>(() => QUALITY_FEED.map((q) => ({ ...q, image: null })));
+  const addInputRef = useRef<HTMLInputElement>(null);
+
+  const setRowImage = (idx: number, url: string) =>
+    setRows((prev) => prev.map((r, i) => (i === idx ? { ...r, image: url } : r)));
+
+  const addEntryFromFile = (file: File) => {
+    const now = new Date();
+    const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    const newRow: FeedRow = {
+      time,
+      batch: `B-${Math.floor(56230 + Math.random() * 70)}`,
+      product: "Manual upload",
+      plant: "—",
+      stage: "Pre-dispatch",
+      defect: false,
+      defectType: "—",
+      confidence: 0,
+      disposition: "Hold for Review",
+      inspector: "Human override",
+      image: URL.createObjectURL(file),
+    };
+    setRows((prev) => [newRow, ...prev]);
+  };
+
   return (
     <div>
       <PageTitle title="Quality Inspection" subtitle="AI-assisted visual inspection at in-line and pre-dispatch stages" />
@@ -38,7 +100,28 @@ function QualityPage() {
         </Card>
 
         <Card className="lg:col-span-2">
-          <CardHeader title="Inspection feed · streaming" subtitle="Newest entries at top · auto-updates from CV pipeline" />
+          <CardHeader
+            title="Inspection feed · streaming"
+            subtitle="Newest entries at top · auto-updates from CV pipeline"
+            action={
+              <>
+                <input
+                  ref={addInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) addEntryFromFile(f);
+                    e.target.value = "";
+                  }}
+                />
+                <Btn variant="outline" size="sm" onClick={() => addInputRef.current?.click()}>
+                  <Upload size={12} className="mr-1" /> Upload image
+                </Btn>
+              </>
+            }
+          />
           <CardBody className="p-0">
             <div className="max-h-[300px] overflow-y-auto">
               <table className="w-full text-[12.5px]">
@@ -56,7 +139,7 @@ function QualityPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {QUALITY_FEED.map((q, i) => (
+                  {rows.map((q, i) => (
                     <tr key={q.batch + i} className={`border-t border-border ${q.defect ? "bg-warning/5" : ""}`}>
                       <td className="px-3 py-2 font-mono text-[11px] text-muted-foreground">{q.time}</td>
                       <td className="px-3 py-2 font-mono text-[11px]">{q.batch}</td>
@@ -69,9 +152,7 @@ function QualityPage() {
                         <StatusBadge status={q.disposition === "Pass" ? "healthy" : q.disposition === "Reject" ? "critical" : "warning"}>{q.disposition}</StatusBadge>
                       </td>
                       <td className="px-3 py-2">
-                        <div className={`flex h-8 w-12 items-center justify-center rounded border ${q.defect ? "border-critical/30 bg-critical/5 text-critical" : "border-border bg-panel text-muted-foreground"}`}>
-                          <ImageIcon size={12} />
-                        </div>
+                        <ImageCell defect={q.defect} image={q.image} onUpload={(url) => setRowImage(i, url)} />
                       </td>
                     </tr>
                   ))}
