@@ -9,61 +9,247 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppNetworkScenariosRouteImport } from './routes/_app.network.scenarios'
+import { Route as AppNetworkPlaybackRouteImport } from './routes/_app.network.playback'
+import { Route as AppNetworkMapRouteImport } from './routes/_app.network.map'
+import { Route as AppNetworkCompareRouteImport } from './routes/_app.network.compare'
+import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
+import { Route as AppInventoryStockRouteImport } from './routes/_app.inventory.stock'
+import { Route as AppInventoryOrdersRouteImport } from './routes/_app.inventory.orders'
+import { Route as AppInventoryAlertsRouteImport } from './routes/_app.inventory.alerts'
 
-const IndexRoute = IndexRouteImport.update({
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNetworkScenariosRoute = AppNetworkScenariosRouteImport.update({
+  id: '/network/scenarios',
+  path: '/network/scenarios',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNetworkPlaybackRoute = AppNetworkPlaybackRouteImport.update({
+  id: '/network/playback',
+  path: '/network/playback',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNetworkMapRoute = AppNetworkMapRouteImport.update({
+  id: '/network/map',
+  path: '/network/map',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNetworkCompareRoute = AppNetworkCompareRouteImport.update({
+  id: '/network/compare',
+  path: '/network/compare',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
+  id: '/inventory/transfers',
+  path: '/inventory/transfers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryStockRoute = AppInventoryStockRouteImport.update({
+  id: '/inventory/stock',
+  path: '/inventory/stock',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryOrdersRoute = AppInventoryOrdersRouteImport.update({
+  id: '/inventory/orders',
+  path: '/inventory/orders',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryAlertsRoute = AppInventoryAlertsRouteImport.update({
+  id: '/inventory/alerts',
+  path: '/inventory/alerts',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
+  '/inventory/alerts': typeof AppInventoryAlertsRoute
+  '/inventory/orders': typeof AppInventoryOrdersRoute
+  '/inventory/stock': typeof AppInventoryStockRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/network/compare': typeof AppNetworkCompareRoute
+  '/network/map': typeof AppNetworkMapRoute
+  '/network/playback': typeof AppNetworkPlaybackRoute
+  '/network/scenarios': typeof AppNetworkScenariosRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
+  '/inventory/alerts': typeof AppInventoryAlertsRoute
+  '/inventory/orders': typeof AppInventoryOrdersRoute
+  '/inventory/stock': typeof AppInventoryStockRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/network/compare': typeof AppNetworkCompareRoute
+  '/network/map': typeof AppNetworkMapRoute
+  '/network/playback': typeof AppNetworkPlaybackRoute
+  '/network/scenarios': typeof AppNetworkScenariosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/': typeof AppIndexRoute
+  '/_app/inventory/alerts': typeof AppInventoryAlertsRoute
+  '/_app/inventory/orders': typeof AppInventoryOrdersRoute
+  '/_app/inventory/stock': typeof AppInventoryStockRoute
+  '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/_app/network/compare': typeof AppNetworkCompareRoute
+  '/_app/network/map': typeof AppNetworkMapRoute
+  '/_app/network/playback': typeof AppNetworkPlaybackRoute
+  '/_app/network/scenarios': typeof AppNetworkScenariosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/inventory/alerts'
+    | '/inventory/orders'
+    | '/inventory/stock'
+    | '/inventory/transfers'
+    | '/network/compare'
+    | '/network/map'
+    | '/network/playback'
+    | '/network/scenarios'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/inventory/alerts'
+    | '/inventory/orders'
+    | '/inventory/stock'
+    | '/inventory/transfers'
+    | '/network/compare'
+    | '/network/map'
+    | '/network/playback'
+    | '/network/scenarios'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_app/'
+    | '/_app/inventory/alerts'
+    | '/_app/inventory/orders'
+    | '/_app/inventory/stock'
+    | '/_app/inventory/transfers'
+    | '/_app/network/compare'
+    | '/_app/network/map'
+    | '/_app/network/playback'
+    | '/_app/network/scenarios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/network/scenarios': {
+      id: '/_app/network/scenarios'
+      path: '/network/scenarios'
+      fullPath: '/network/scenarios'
+      preLoaderRoute: typeof AppNetworkScenariosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/network/playback': {
+      id: '/_app/network/playback'
+      path: '/network/playback'
+      fullPath: '/network/playback'
+      preLoaderRoute: typeof AppNetworkPlaybackRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/network/map': {
+      id: '/_app/network/map'
+      path: '/network/map'
+      fullPath: '/network/map'
+      preLoaderRoute: typeof AppNetworkMapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/network/compare': {
+      id: '/_app/network/compare'
+      path: '/network/compare'
+      fullPath: '/network/compare'
+      preLoaderRoute: typeof AppNetworkCompareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory/transfers': {
+      id: '/_app/inventory/transfers'
+      path: '/inventory/transfers'
+      fullPath: '/inventory/transfers'
+      preLoaderRoute: typeof AppInventoryTransfersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory/stock': {
+      id: '/_app/inventory/stock'
+      path: '/inventory/stock'
+      fullPath: '/inventory/stock'
+      preLoaderRoute: typeof AppInventoryStockRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory/orders': {
+      id: '/_app/inventory/orders'
+      path: '/inventory/orders'
+      fullPath: '/inventory/orders'
+      preLoaderRoute: typeof AppInventoryOrdersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory/alerts': {
+      id: '/_app/inventory/alerts'
+      path: '/inventory/alerts'
+      fullPath: '/inventory/alerts'
+      preLoaderRoute: typeof AppInventoryAlertsRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppIndexRoute: typeof AppIndexRoute
+  AppInventoryAlertsRoute: typeof AppInventoryAlertsRoute
+  AppInventoryOrdersRoute: typeof AppInventoryOrdersRoute
+  AppInventoryStockRoute: typeof AppInventoryStockRoute
+  AppInventoryTransfersRoute: typeof AppInventoryTransfersRoute
+  AppNetworkCompareRoute: typeof AppNetworkCompareRoute
+  AppNetworkMapRoute: typeof AppNetworkMapRoute
+  AppNetworkPlaybackRoute: typeof AppNetworkPlaybackRoute
+  AppNetworkScenariosRoute: typeof AppNetworkScenariosRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppIndexRoute: AppIndexRoute,
+  AppInventoryAlertsRoute: AppInventoryAlertsRoute,
+  AppInventoryOrdersRoute: AppInventoryOrdersRoute,
+  AppInventoryStockRoute: AppInventoryStockRoute,
+  AppInventoryTransfersRoute: AppInventoryTransfersRoute,
+  AppNetworkCompareRoute: AppNetworkCompareRoute,
+  AppNetworkMapRoute: AppNetworkMapRoute,
+  AppNetworkPlaybackRoute: AppNetworkPlaybackRoute,
+  AppNetworkScenariosRoute: AppNetworkScenariosRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
