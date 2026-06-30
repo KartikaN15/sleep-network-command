@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppPlantEquipmentRouteImport } from './routes/_app.plant.equipment'
 import { Route as AppNetworkScenariosRouteImport } from './routes/_app.network.scenarios'
 import { Route as AppNetworkPlaybackRouteImport } from './routes/_app.network.playback'
 import { Route as AppNetworkMapRouteImport } from './routes/_app.network.map'
@@ -27,6 +28,11 @@ const AppRoute = AppRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlantEquipmentRoute = AppPlantEquipmentRouteImport.update({
+  id: '/plant/equipment',
+  path: '/plant/equipment',
   getParentRoute: () => AppRoute,
 } as any)
 const AppNetworkScenariosRoute = AppNetworkScenariosRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/network/map': typeof AppNetworkMapRoute
   '/network/playback': typeof AppNetworkPlaybackRoute
   '/network/scenarios': typeof AppNetworkScenariosRoute
+  '/plant/equipment': typeof AppPlantEquipmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/network/map': typeof AppNetworkMapRoute
   '/network/playback': typeof AppNetworkPlaybackRoute
   '/network/scenarios': typeof AppNetworkScenariosRoute
+  '/plant/equipment': typeof AppPlantEquipmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/_app/network/map': typeof AppNetworkMapRoute
   '/_app/network/playback': typeof AppNetworkPlaybackRoute
   '/_app/network/scenarios': typeof AppNetworkScenariosRoute
+  '/_app/plant/equipment': typeof AppPlantEquipmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/network/map'
     | '/network/playback'
     | '/network/scenarios'
+    | '/plant/equipment'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/network/map'
     | '/network/playback'
     | '/network/scenarios'
+    | '/plant/equipment'
   id:
     | '__root__'
     | '/_app'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/_app/network/map'
     | '/_app/network/playback'
     | '/_app/network/scenarios'
+    | '/_app/plant/equipment'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/plant/equipment': {
+      id: '/_app/plant/equipment'
+      path: '/plant/equipment'
+      fullPath: '/plant/equipment'
+      preLoaderRoute: typeof AppPlantEquipmentRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/network/scenarios': {
@@ -231,6 +250,7 @@ interface AppRouteChildren {
   AppNetworkMapRoute: typeof AppNetworkMapRoute
   AppNetworkPlaybackRoute: typeof AppNetworkPlaybackRoute
   AppNetworkScenariosRoute: typeof AppNetworkScenariosRoute
+  AppPlantEquipmentRoute: typeof AppPlantEquipmentRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -243,6 +263,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppNetworkMapRoute: AppNetworkMapRoute,
   AppNetworkPlaybackRoute: AppNetworkPlaybackRoute,
   AppNetworkScenariosRoute: AppNetworkScenariosRoute,
+  AppPlantEquipmentRoute: AppPlantEquipmentRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
