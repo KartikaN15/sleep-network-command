@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppPlantProductionRouteImport } from './routes/_app.plant.production'
 import { Route as AppPlantMaintenanceRouteImport } from './routes/_app.plant.maintenance'
 import { Route as AppPlantEquipmentRouteImport } from './routes/_app.plant.equipment'
 import { Route as AppNetworkScenariosRouteImport } from './routes/_app.network.scenarios'
@@ -29,6 +30,11 @@ const AppRoute = AppRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlantProductionRoute = AppPlantProductionRouteImport.update({
+  id: '/plant/production',
+  path: '/plant/production',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPlantMaintenanceRoute = AppPlantMaintenanceRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/network/scenarios': typeof AppNetworkScenariosRoute
   '/plant/equipment': typeof AppPlantEquipmentRoute
   '/plant/maintenance': typeof AppPlantMaintenanceRoute
+  '/plant/production': typeof AppPlantProductionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/network/scenarios': typeof AppNetworkScenariosRoute
   '/plant/equipment': typeof AppPlantEquipmentRoute
   '/plant/maintenance': typeof AppPlantMaintenanceRoute
+  '/plant/production': typeof AppPlantProductionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/_app/network/scenarios': typeof AppNetworkScenariosRoute
   '/_app/plant/equipment': typeof AppPlantEquipmentRoute
   '/_app/plant/maintenance': typeof AppPlantMaintenanceRoute
+  '/_app/plant/production': typeof AppPlantProductionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/network/scenarios'
     | '/plant/equipment'
     | '/plant/maintenance'
+    | '/plant/production'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/network/scenarios'
     | '/plant/equipment'
     | '/plant/maintenance'
+    | '/plant/production'
   id:
     | '__root__'
     | '/_app'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/_app/network/scenarios'
     | '/_app/plant/equipment'
     | '/_app/plant/maintenance'
+    | '/_app/plant/production'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +196,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/plant/production': {
+      id: '/_app/plant/production'
+      path: '/plant/production'
+      fullPath: '/plant/production'
+      preLoaderRoute: typeof AppPlantProductionRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/plant/maintenance': {
@@ -271,6 +290,7 @@ interface AppRouteChildren {
   AppNetworkScenariosRoute: typeof AppNetworkScenariosRoute
   AppPlantEquipmentRoute: typeof AppPlantEquipmentRoute
   AppPlantMaintenanceRoute: typeof AppPlantMaintenanceRoute
+  AppPlantProductionRoute: typeof AppPlantProductionRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -285,6 +305,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppNetworkScenariosRoute: AppNetworkScenariosRoute,
   AppPlantEquipmentRoute: AppPlantEquipmentRoute,
   AppPlantMaintenanceRoute: AppPlantMaintenanceRoute,
+  AppPlantProductionRoute: AppPlantProductionRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
