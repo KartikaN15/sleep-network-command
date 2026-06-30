@@ -36,7 +36,7 @@ function Login() {
               <div><div className="text-[22px] font-bold text-teal">248 hrs</div>Downtime avoided</div>
             </div>
           </div>
-          <div className="text-[11px] text-white/40">SleepNet Industries Pvt Ltd · v4.2.1</div>
+          <div className="text-[11px] text-white/40">Logistics Industries Pvt Ltd · v4.2.1</div>
         </div>
       </div>
 
@@ -52,7 +52,7 @@ function Login() {
           <div className="mt-5 space-y-3">
             <div>
               <label className="text-[12px] font-medium">Email</label>
-              <input defaultValue="cs.head@sleepnet.in" className="mt-1 h-10 w-full rounded-md border border-input bg-background px-3 text-[13px]" />
+              <input defaultValue="cs.head@logistics.in" className="mt-1 h-10 w-full rounded-md border border-input bg-background px-3 text-[13px]" />
             </div>
             <div>
               <label className="text-[12px] font-medium">Password</label>
@@ -77,7 +77,7 @@ function Login() {
             <Btn variant="primary" className="mt-2 w-full" onClick={() => nav({ to: "/" })}>
               <ShieldCheck size={14} /> Sign in securely
             </Btn>
-            <div className="text-center text-[11.5px] text-muted-foreground">SSO via Okta available · Help: it.support@sleepnet.in</div>
+            <div className="text-center text-[11.5px] text-muted-foreground">SSO via Okta available · Help: it.support@logistics.in</div>
           </div>
         </div>
       </div>

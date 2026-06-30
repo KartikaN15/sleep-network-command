@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_app/settings/locations")({ component: Pa
 function Page() {
   return (
     <div>
-      <PageTitle title="Locations & Network Nodes" subtitle="All physical nodes in the SleepNet supply network" />
+      <PageTitle title="Locations & Network Nodes" subtitle="All physical nodes in the Logistics supply network" />
       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">
         <KpiCard label="Manufacturing plants" value={`${PLANTS.length}`} accent="teal" />
         <KpiCard label="Distribution centres" value={`${WAREHOUSES.length}`} accent="teal" />

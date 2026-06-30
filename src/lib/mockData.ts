@@ -388,12 +388,12 @@ export const INTEGRATIONS = [
 ];
 
 export const USERS_DATA = [
-  { name: "Chandrashekar R.", role: "Supply Chain Head", email: "cs.head@sleepnet.in", status: "Active", lastLogin: "Just now" },
-  { name: "Priya Menon", role: "Plant Operations", email: "priya.m@sleepnet.in", status: "Active", lastLogin: "12 min ago" },
-  { name: "Arjun Iyer", role: "Warehouse Manager", email: "arjun.i@sleepnet.in", status: "Active", lastLogin: "1 hr ago" },
-  { name: "Neha Sharma", role: "Warehouse Manager", email: "neha.s@sleepnet.in", status: "Active", lastLogin: "Yesterday" },
-  { name: "Rakesh Patel", role: "Plant Operations", email: "rakesh.p@sleepnet.in", status: "Active", lastLogin: "Yesterday" },
-  { name: "Vikram Singh", role: "Supply Chain Head", email: "vikram.s@sleepnet.in", status: "Inactive", lastLogin: "12 days ago" },
+  { name: "Chandrashekar R.", role: "Supply Chain Head", email: "cs.head@logistics.in", status: "Active", lastLogin: "Just now" },
+  { name: "Priya Menon", role: "Plant Operations", email: "priya.m@logistics.in", status: "Active", lastLogin: "12 min ago" },
+  { name: "Arjun Iyer", role: "Warehouse Manager", email: "arjun.i@logistics.in", status: "Active", lastLogin: "1 hr ago" },
+  { name: "Neha Sharma", role: "Warehouse Manager", email: "neha.s@logistics.in", status: "Active", lastLogin: "Yesterday" },
+  { name: "Rakesh Patel", role: "Plant Operations", email: "rakesh.p@logistics.in", status: "Active", lastLogin: "Yesterday" },
+  { name: "Vikram Singh", role: "Supply Chain Head", email: "vikram.s@logistics.in", status: "Inactive", lastLogin: "12 days ago" },
 ];
 
 export const ALERT_CONFIGS = [

@@ -139,7 +139,7 @@ export function AppSidebar({ collapsed, onToggle }: { collapsed: boolean; onTogg
         <div className="border-t border-sidebar-border p-3 text-[10px] text-sidebar-muted">
           <div className="flex items-center gap-2">
             <Building2 size={12} />
-            <span>SleepNet Industries Pvt Ltd</span>
+            <span>Logistics Industries Pvt Ltd</span>
           </div>
           <div className="mt-1">v4.2.1 · 5 plants · 8 DCs</div>
         </div>
@@ -176,7 +176,7 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center gap-4 border-b border-border bg-background px-6">
       <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
-        <span className="text-primary font-medium">SleepNet</span>
+        <span className="text-primary font-medium">Logistic Command</span>
         {crumbs.map((c, i) => (
           <span key={i} className="flex items-center gap-1.5">
             <span className="text-muted-foreground/50">/</span>
