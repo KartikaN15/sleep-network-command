@@ -4,7 +4,7 @@ import { QUALITY_DEFECTS, QUALITY_FEED, SUPPLIER_SCORECARD } from "@/lib/mockDat
 import { Card, CardHeader, CardBody, PageTitle, KpiCard, Btn } from "@/components/ui-bits";
 import { StatusBadge } from "@/components/NetworkMap";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from "recharts";
-import { ImageIcon, AlertCircle, TrendingDown, TrendingUp, Minus, Upload } from "lucide-react";
+import { ImagePlus, AlertCircle, TrendingDown, TrendingUp, Minus, Upload } from "lucide-react";
 
 export const Route = createFileRoute("/_app/plant/quality")({
   component: QualityPage,
@@ -40,7 +40,7 @@ function ImageCell({ defect, image, onUpload }: { defect: boolean; image?: strin
               : "border-border bg-panel text-muted-foreground"
         }`}
       >
-        {image ? <img src={image} alt="inspection" className="h-full w-full object-cover" /> : <ImageIcon size={12} />}
+        {image ? <img src={image} alt="inspection" className="h-full w-full object-cover" /> : <ImagePlus size={14} />}
       </button>
     </>
   );
